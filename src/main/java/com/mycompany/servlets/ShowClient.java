@@ -40,6 +40,9 @@ public class ShowClient extends HttpServlet {
 			out.println("<html>");
 			out.println("<head>");
 			out.println("<title>Servlet ShowClientInState</title>");
+                        out.println("<style>");
+                        out.println("table, th, td {\n" +"  border: 1px solid black;\n" +"}");
+                        out.println("</style>");
 			out.println("</head>");
 			out.println("<body>");
 			try {	// Trouver la valeur du paramètre HTTP customerID
@@ -55,13 +58,20 @@ public class ShowClient extends HttpServlet {
 				if (customer == null) {
 					throw new Exception("Client inconnu");
 				}
+                                out.println("<table style=\"width:100%\">");
+                                out.println( "<tr> ");
+                                out.println("<th>ID</th>" +"    <th>NOM</th>" +"    <th>ADRESSE</th><br/>");   
+                                out.println( "</tr> ");
 				// Afficher les propriétés du client	
                                 for(int i = 0; i<customer.size(); i++){
-                                    out.printf("<tr>\n" +"    <th>%s</th>\n" +"    <th>%s</th>\n" +"    <th>%s</th>",
+                                    out.println( "<tr> ");
+                                    out.printf(" <td>%s</td>" +"    <td>%s</td>" +"    <td>%s</td>",
 					customer.get(i).getCustomerId(),
 					customer.get(i).getName(),
 					customer.get(i).getAddressLine1());
+                                    out.println( "</tr> ");
                                 }
+                                out.println("</table>");
 			} catch (Exception e) {
 				out.printf("Erreur : %s", e.getMessage());
 			}
